@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
@@ -19,7 +20,7 @@ public class Character implements Serializable {
     @SequenceGenerator(name = "character_generator", sequenceName = "character_seq", allocationSize = 1)
     private UUID id;
 
-    //@NotBlank(message = "Character name cannot be blank")
+    @NotBlank(message = "Character name cannot be blank")
     private String name;
 
     private String description;
