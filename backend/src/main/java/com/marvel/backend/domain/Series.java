@@ -23,9 +23,6 @@ public class Series implements Serializable {
 
     private String description;
 
-    @Column(name = "resource_uri")
-    private String resourceURI;
-
     @Column(name = "start_year")
     private Integer startYear;
 
@@ -38,5 +35,4 @@ public class Series implements Serializable {
     @LastModifiedDate
     private Date modified;
 
-    private String thumbnail;
 }

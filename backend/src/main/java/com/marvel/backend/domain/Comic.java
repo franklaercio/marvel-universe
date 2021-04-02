@@ -2,9 +2,11 @@ package com.marvel.backend.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
@@ -22,6 +24,8 @@ public class Comic implements Serializable {
     @Column(name = "digital_id")
     private Integer digitalId;
 
+    @NotBlank(message = "Comic title cannot be blank")
+    @UniqueElements(message = "Comic title be repeated")
     private String title;
 
     @Column(name = "issue_number")
@@ -50,8 +54,4 @@ public class Comic implements Serializable {
     @Column(name = "page_count")
     private Integer pageCount;
 
-    @Column(name = "resource_uri")
-    private String resourceURI;
-
-    private String thumbnail;
 }

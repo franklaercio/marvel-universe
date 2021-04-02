@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
@@ -19,26 +20,12 @@ public class Creator implements Serializable {
     @SequenceGenerator(name = "creator_generator", sequenceName = "creator_seq", allocationSize = 1)
     private UUID id;
 
+    @NotBlank(message = "Creator name cannot be blank")
     @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "middle_name")
-    private String middleName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    private String suffix;
-
-    @Column(name = "full_name")
-    private String fullName;
+    private String name;
 
     @Timestamp
     @LastModifiedDate
     private Date modified;
 
-    @Column(name = "resource_uri")
-    private String resourceURI;
-
-    private String thumbnail;
 }

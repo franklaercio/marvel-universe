@@ -2,9 +2,11 @@ package com.marvel.backend.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
@@ -19,12 +21,11 @@ public class Story implements Serializable {
     @SequenceGenerator(name = "story_generator", sequenceName = "story_seq", allocationSize = 1)
     private UUID id;
 
+    @NotBlank(message = "Story title cannot be blank")
+    @UniqueElements(message = "Story title cannot be repeated")
     private String title;
 
     private String description;
-
-    @Column(name = "resource_uri")
-    private String resourceURI;
 
     private String type;
 
@@ -32,5 +33,4 @@ public class Story implements Serializable {
     @LastModifiedDate
     private Date modified;
 
-    private String thumbnail;
 }

@@ -2,6 +2,7 @@ package com.marvel.backend.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Character implements Serializable {
     private UUID id;
 
     @NotBlank(message = "Character name cannot be blank")
+    @UniqueElements(message = "Character name cannot be repeated")
     private String name;
 
     private String description;
@@ -29,10 +31,4 @@ public class Character implements Serializable {
     @LastModifiedDate
     private Date modified;
 
-    @Column(name = "resource_uri")
-    private String resourceURI;
-
-    //private String urls;
-
-    private String thumbnail;
 }
