@@ -3,6 +3,7 @@ package com.marvel.backend.domain;
 import jdk.jfr.Timestamp;
 import lombok.Data;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Data
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "series")
 public class Series implements Serializable {
 
