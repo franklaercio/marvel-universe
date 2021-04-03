@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Data
+@Cacheable
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "creator")
@@ -23,7 +24,6 @@ public class Creator implements Serializable {
     private UUID id;
 
     @NotBlank(message = "Creator name cannot be blank")
-    @Column(name = "first_name")
     private String name;
 
     @Timestamp

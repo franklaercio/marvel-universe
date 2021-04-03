@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Data
+@Cacheable
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "event")

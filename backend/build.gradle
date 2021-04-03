@@ -27,6 +27,10 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+	testCompile 'org.mockito:mockito-junit-jupiter:3.8.0'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.3.7.Final'
 }
 
 test {
