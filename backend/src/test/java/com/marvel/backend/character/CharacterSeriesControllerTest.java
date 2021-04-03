@@ -1,4 +1,4 @@
-package com.marvel.backend.characterSeries;
+package com.marvel.backend.character;
 
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;

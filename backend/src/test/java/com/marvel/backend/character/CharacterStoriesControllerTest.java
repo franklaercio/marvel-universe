@@ -1,4 +1,4 @@
-package com.marvel.backend.characterComic;
+package com.marvel.backend.character;
 
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CharacterComicControllerTest {
+public class CharacterStoriesControllerTest {
 
     @Autowired
     private WebApplicationContext applicationContext;
@@ -38,27 +38,27 @@ public class CharacterComicControllerTest {
     }
 
     @Test
-    void shouldBeReturnsHttpStatusOkCharacterComic() throws Exception {
+    void shouldBeReturnsHttpStatusOkCharacterStories() throws Exception {
         this.mockMvc.perform(
-                get("/v1/public/characters/1/comic")
+                get("/v1/public/characters/1/stories")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void shouldBeReturn404HttpStatusCharacterComicWhenNotFoundCharacterId() throws Exception {
+    void shouldBeReturn404HttpStatusCharacterStoriesWhenNotFoundCharacterId() throws Exception {
         this.mockMvc.perform(
-                get("/v1/public/characters/100/comic")
+                get("/v1/public/characters/-1/stories")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    void shouldBeReturn400HttpStatusCharacterComicWhenEnterTextId() throws Exception {
+    void shouldBeReturn400HttpStatusCharacterStoriesWhenEnterTextId() throws Exception {
         this.mockMvc.perform(
-                get("/v1/public/characters/Hulk/comic")
+                get("/v1/public/characters/Hulk/stories")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
