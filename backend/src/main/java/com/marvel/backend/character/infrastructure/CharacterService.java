@@ -37,6 +37,20 @@ public class CharacterService {
         this.eventRepository = eventRepository;
     }
 
+    public List<CharacterDTO> findAll() {
+        Iterable<Character> savedCharacters = characterRepository.findAll();
+        List<CharacterDTO> characters = new ArrayList<>();
+
+        savedCharacters.forEach(character -> characters.add(populateCharacterDTO(character)));
+
+        return characters;
+    }
+
+    public CharacterDTO findByCharacterId(Integer characterId) {
+        Character savedCharacters = characterRepository.findById(characterId).orElse(null);
+        return populateCharacterDTO(savedCharacters);
+    }
+
     private CharacterDTO populateCharacterDTO(Character character) {
         CharacterDTO characterDTO = new CharacterDTO();
 
@@ -51,15 +65,6 @@ public class CharacterService {
         characterDTO.setEvents(insertCharacterEvent(character.getId()));
 
         return characterDTO;
-    }
-
-    public List<CharacterDTO> findAll() {
-        Iterable<Character> savedCharacters = characterRepository.findAll();
-        List<CharacterDTO> characters = new ArrayList<>();
-
-        savedCharacters.forEach(character -> characters.add(populateCharacterDTO(character)));
-
-        return characters;
     }
 
     private CharacterComicDTO insertCharacterComic(Integer characterId) {
