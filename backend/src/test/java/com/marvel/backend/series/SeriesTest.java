@@ -1,34 +1,44 @@
 package com.marvel.backend.series;
 
 import com.marvel.backend.series.domain.Series;
+import com.marvel.backend.series.infrastructure.SeriesRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class SeriesTest {
 
-    @Autowired
-    private CharacterSeriesRepository characterSeriesRepository;
+    @Mock
+    private SeriesRepository seriesRepository;
+
+    @BeforeEach
+    public void setUp(){
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void shouldBeSavedSeries() {
-        Series series = new Series();
+        Series series = Mockito.mock(Series.class);
         series.setTitle("Lorem ipsum");
         series.setDescription("Lorem ipsum dolor sit amet");
         series.setStartYear(2021);
         series.setEndYear(2021);
 
-        characterSeriesRepository.save(series);
+        seriesRepository.save(series);
 
-        Series seriesSaved = characterSeriesRepository.findByTitle("Lorem ipsum").orElse(null);
+        assertThat(series.getId()).isNotNull();
 
-        assertThat(seriesSaved).isNotNull();
+        verify(seriesRepository, times(1)).save(series);
     }
 
     @Test
@@ -36,7 +46,11 @@ public class SeriesTest {
         Series series = new Series();
         series.setTitle("");
 
-        fail("Series name cannot be blank", characterSeriesRepository.save(character));
+        seriesRepository.save(series);
+
+        assertThat(series.getId()).isNull();
+
+        verify(seriesRepository, times(1)).save(series);
     }
 
     @Test
@@ -44,13 +58,11 @@ public class SeriesTest {
         Series series = new Series();
         series.setTitle("Lorem ipsum");
 
-        fail("Series start year cannot be blank", characterSeriesRepository.save(character));
+        seriesRepository.save(series);
+
+        assertThat(series.getId()).isNull();
+
+        verify(seriesRepository, times(1)).save(series);
     }
 
-    @Test
-    public void shouldBeNotSavedRepeatedSeries() {
-        Series seriesTest = characterSeriesRepository.findById(1).orElse(null);;
-
-        fail("Series name cannot be repeated", characterSeriesRepository.save(seriesTest));
-    }
 }

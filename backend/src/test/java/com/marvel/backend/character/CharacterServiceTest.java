@@ -3,7 +3,6 @@ package com.marvel.backend.character;
 import com.marvel.backend.character.domain.CharacterDTO;
 import com.marvel.backend.character.infrastructure.CharacterRepository;
 import com.marvel.backend.character.infrastructure.CharacterService;
-
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -46,11 +46,13 @@ public class CharacterServiceTest {
     void whenFindCharacterHulkShouldBeReturnOneResult() {
         //Character character = this.characterService.findAll("Hulk");
         //assertThat(character).isNotNull();
+        fail("Not implemented");
     }
 
     @Test
     void whenFindCharacterNotSavedShouldBeReturnNull() {
         //Character character = this.characterService.characters("Lorem Ipsum");
-       // assertThat(character).isNull();
+        // assertThat(character).isNull();
+        fail("Not implemented");
     }
 }

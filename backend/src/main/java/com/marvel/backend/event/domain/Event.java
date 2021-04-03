@@ -2,12 +2,12 @@ package com.marvel.backend.event.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,7 +23,6 @@ public class Event implements Serializable {
     private Integer id;
 
     @NotBlank(message = "Event name cannot be blank")
-    @UniqueElements(message = "Event name be repeated")
     private String name;
 
     private String description;
@@ -32,7 +31,7 @@ public class Event implements Serializable {
     @LastModifiedDate
     private Date modified;
 
-    @NotBlank(message = "Event start cannot be blank")
+    @NotNull(message = "Event start cannot be blank")
     @Timestamp
     @Column(name = "start_event")
     private Date start;

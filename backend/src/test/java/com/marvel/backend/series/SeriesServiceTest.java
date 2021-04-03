@@ -1,5 +1,7 @@
-package com.marvel.backend.characterSeries;
+package com.marvel.backend.series;
 
+import com.marvel.backend.series.infrastructure.SeriesRepository;
+import com.marvel.backend.series.infrastructure.SeriesService;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,37 +10,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CharacterSeriesServiceTest {
+public class SeriesServiceTest {
 
     @Autowired
     private Flyway flyway;
 
     @Autowired
-    private CharacterSeriesRepository charactereSeriespository;
+    private SeriesRepository seriesRepository;
 
-    private CharacterSeriesService characterSeriesService = Mockito.mock(CharacterSeriesService.class);
+    private SeriesService seriesService = Mockito.mock(SeriesService.class);
 
     @BeforeEach
     public void setUp() {
         flyway.clean();
         flyway.migrate();
 
-        this.characterSeriesService = new CharacterSeriesService(charactereSeriespository);
+        this.seriesService = new SeriesService(seriesRepository);
     }
 
     @Test
     void whenFindCharacterSeriesWithId1ShouldBeReturnResult() {
-        Character character = this.characterSeriesService.charactersSeriess(1);
-        assertThat(character).isNotNull();
+        //Character character = this.seriesService.charactersSeriess(1);
+        fail("Not implemented");
     }
 
     @Test
     void whenFindCharacterSeriesNotSavedShouldBeReturnNull() {
-        Character character = this.characterSeriesService.charactersSeriess(100);
-        assertThat(character).isNull();
+        //Character character = this.seriesService.charactersSeriess(100);
+        //assertThat(character).isNull();
+        fail("Not implemented");
     }
 }

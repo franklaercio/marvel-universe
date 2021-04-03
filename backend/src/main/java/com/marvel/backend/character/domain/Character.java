@@ -2,7 +2,6 @@ package com.marvel.backend.character.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -23,7 +22,6 @@ public class Character implements Serializable {
     private Integer id;
 
     @NotBlank(message = "Character name cannot be blank")
-    @UniqueElements(message = "Character name cannot be repeated")
     private String name;
 
     private String description;
@@ -31,5 +29,12 @@ public class Character implements Serializable {
     @Timestamp
     @LastModifiedDate
     private Date modified;
+
+    public Character() {}
+
+    public Character(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
 }

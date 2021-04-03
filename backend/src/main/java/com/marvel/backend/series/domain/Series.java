@@ -2,12 +2,12 @@ package com.marvel.backend.series.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,12 +23,11 @@ public class Series implements Serializable {
     private Integer id;
 
     @NotBlank(message = "Series title cannot be blank")
-    @UniqueElements(message = "Series title be repeated")
     private String title;
 
     private String description;
 
-    @NotBlank(message = "Series start year cannot be blank")
+    @NotNull(message = "Series start year cannot be blank")
     @Column(name = "start_year")
     private Integer startYear;
 

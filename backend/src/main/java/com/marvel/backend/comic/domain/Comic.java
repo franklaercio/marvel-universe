@@ -2,7 +2,6 @@ package com.marvel.backend.comic.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -26,7 +25,6 @@ public class Comic implements Serializable {
     private Integer digitalId;
 
     @NotBlank(message = "Comic title cannot be blank")
-    @UniqueElements(message = "Comic title be repeated")
     private String title;
 
     @Column(name = "issue_number")

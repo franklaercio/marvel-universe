@@ -1,36 +1,40 @@
 package com.marvel.backend.character;
 
 import com.marvel.backend.character.domain.Character;
-
 import com.marvel.backend.character.infrastructure.CharacterRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Objects;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CharacterTest {
 
-    @Autowired
+    @Mock
     private CharacterRepository characterRepository;
+
+    @BeforeEach
+    public void setUp(){
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void shouldBeSavedCharacter() {
-        Character character = new Character();
+        Character character = Mockito.mock(Character.class);
         character.setName("Lorem ipsum");
         character.setDescription("Lorem ipsum dolor sit amet");
 
-        characterRepository.save(character);
+        when(characterRepository.save(any(Character.class))).thenReturn(character);
 
-        Character characterSaved = characterRepository.findByName("Lorem ipsum").orElse(null);
-
-        assertThat(characterSaved).isNotNull();
+        assertThat(character.getId()).isNotNull();
     }
 
     @Test
@@ -39,13 +43,11 @@ public class CharacterTest {
         character.setName("");
         character.setDescription("Lorem ipsum dolor sit amet");
 
-        fail("Character name cannot be blank", characterRepository.save(character));
+        characterRepository.save(character);
+
+        assertThat(character.getId()).isNull();
+
+        verify(characterRepository, times(1)).save(character);
     }
 
-    @Test
-    public void shouldBeNotSavedRepeatedCharacter() {
-        Character characterTest = characterRepository.findById(1).orElse(null);
-
-        fail("Character name cannot be repeated", characterRepository.save(Objects.requireNonNull(characterTest)));
-    }
 }

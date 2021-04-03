@@ -1,36 +1,44 @@
 package com.marvel.backend.event;
 
 import com.marvel.backend.event.domain.Event;
+import com.marvel.backend.event.infrastructure.EventRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 public class EventTest {
 
-    @Autowired
-    private CharacterEventRepository characterEventRepository;
+    @Mock
+    private EventRepository eventRepository;
+
+    @BeforeEach
+    public void setUp(){
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void shouldBeSavedEvent() {
-        Event event = new Event();
+        Event event = Mockito.mock(Event.class);
         event.setName("Lorem ipsum");
         event.setDescription("Lorem ipsum dolor sit amet");
         event.setStart(new Date());
         event.setEnd(new Date());
 
-        characterEventRepository.save(event);
+        when(eventRepository.save(any(Event.class))).thenReturn(event);
 
-        Event eventSaved = characterEventRepository.findByName("Lorem ipsum").orElse(null);
+        assertThat(event.getId()).isNotNull();
 
-        assertThat(eventSaved).isNotNull();
+        verify(event, times(1)).getId();
     }
 
     @Test
@@ -38,21 +46,23 @@ public class EventTest {
         Event event = new Event();
         event.setName("");
 
-        fail("Event name cannot be blank", characterEventRepository.save(event));
+        eventRepository.save(event);
+
+        assertThat(event.getId()).isNull();
+
+        verify(eventRepository, times(1)).save(event);
     }
 
     @Test
     public void shouldBeNotSavedInvalidEventStart() {
         Event event = new Event();
         event.setName("Lorem ipsum");
+        event.setStart(null);
 
-        fail("Event start cannot be blank", characterEventRepository.save(event));
-    }
+        eventRepository.save(event);
 
-    @Test
-    public void shouldBeNotSavedRepeatedEvent() {
-        Event eventTest = characterEventRepository.findById(1).orElse(null);;
+        assertThat(event.getId()).isNull();
 
-        fail("Event name cannot be repeated", characterEventRepository.save(eventTest));
+        verify(eventRepository, times(1)).save(event);
     }
 }

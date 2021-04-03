@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class CharacterDTO {
@@ -19,6 +20,16 @@ public class CharacterDTO {
     private String description;
 
     private String modified;
+
+    private String resourceURI;
+
+    private List<CharacterComicDTO> comics;
+
+    private List<CharacterSeriesDTO> series;
+
+    private List<CharacterStoriesDTO> stories;
+
+    private List<CharacterEventDTO> events;
 
     public void setModified(Date modified) {
         this.modified = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(modified);

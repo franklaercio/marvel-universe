@@ -1,10 +1,7 @@
-package com.marvel.backend.stories.domain;
+package com.marvel.backend.story.domain;
 
 import jdk.jfr.Timestamp;
-
 import lombok.Data;
-
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -26,7 +23,6 @@ public class Story implements Serializable {
     private Integer id;
 
     @NotBlank(message = "Story title cannot be blank")
-    @UniqueElements(message = "Story title cannot be repeated")
     private String title;
 
     private String description;
