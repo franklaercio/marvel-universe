@@ -33,7 +33,7 @@ public class CharacterServiceTest {
         flyway.clean();
         flyway.migrate();
 
-        this.characterService = new CharacterService(characterRepository);
+        //this.characterService = new CharacterService(characterRepository);
     }
 
     @Test
