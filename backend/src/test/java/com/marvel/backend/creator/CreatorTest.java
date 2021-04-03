@@ -1,6 +1,6 @@
 package com.marvel.backend.creator;
 
-import com.marvel.backend.domain.Creator;
+import com.marvel.backend.creator.domain.Creator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

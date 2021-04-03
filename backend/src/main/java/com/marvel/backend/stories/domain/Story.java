@@ -1,4 +1,4 @@
-package com.marvel.backend.domain;
+package com.marvel.backend.stories.domain;
 
 import jdk.jfr.Timestamp;
 
@@ -12,7 +12,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Cacheable
@@ -24,7 +23,7 @@ public class Story implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "story_generator")
     @SequenceGenerator(name = "story_generator", sequenceName = "story_seq", allocationSize = 1)
-    private UUID id;
+    private Integer id;
 
     @NotBlank(message = "Story title cannot be blank")
     @UniqueElements(message = "Story title cannot be repeated")

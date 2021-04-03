@@ -1,7 +1,6 @@
 package com.marvel.backend.series;
 
-import com.marvel.backend.domain.Series;
-
+import com.marvel.backend.series.domain.Series;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

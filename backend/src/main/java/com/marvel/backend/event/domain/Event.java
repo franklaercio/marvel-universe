@@ -1,4 +1,4 @@
-package com.marvel.backend.domain;
+package com.marvel.backend.event.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
@@ -10,10 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 @Data
-@Cacheable
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "event")
@@ -22,7 +20,7 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_generator")
     @SequenceGenerator(name = "event_generator", sequenceName = "event_seq", allocationSize = 1)
-    private UUID id;
+    private Integer id;
 
     @NotBlank(message = "Event name cannot be blank")
     @UniqueElements(message = "Event name be repeated")

@@ -1,11 +1,14 @@
 package com.marvel.backend.character;
 
-import com.marvel.backend.domain.Character;
+import com.marvel.backend.character.domain.Character;
 
+import com.marvel.backend.character.infrastructure.CharacterRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -41,8 +44,8 @@ public class CharacterTest {
 
     @Test
     public void shouldBeNotSavedRepeatedCharacter() {
-        Character characterTest = characterRepository.findById(1).orElse(null);;
+        Character characterTest = characterRepository.findById(1).orElse(null);
 
-        fail("Character name cannot be repeated", characterRepository.save(characterTest));
+        fail("Character name cannot be repeated", characterRepository.save(Objects.requireNonNull(characterTest)));
     }
 }

@@ -1,6 +1,6 @@
 package com.marvel.backend.story;
 
-import com.marvel.backend.domain.Story;
+import com.marvel.backend.stories.domain.Story;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

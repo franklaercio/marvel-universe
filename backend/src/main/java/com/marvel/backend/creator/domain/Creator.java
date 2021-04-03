@@ -1,4 +1,4 @@
-package com.marvel.backend.domain;
+package com.marvel.backend.creator.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
@@ -9,10 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 @Data
-@Cacheable
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "creator")
@@ -21,7 +19,7 @@ public class Creator implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "creator_generator")
     @SequenceGenerator(name = "creator_generator", sequenceName = "creator_seq", allocationSize = 1)
-    private UUID id;
+    private Integer id;
 
     @NotBlank(message = "Creator name cannot be blank")
     private String name;

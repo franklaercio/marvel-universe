@@ -1,4 +1,4 @@
-package com.marvel.backend.domain;
+package com.marvel.backend.comic.domain;
 
 import jdk.jfr.Timestamp;
 import lombok.Data;
@@ -10,10 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 @Data
-@Cacheable
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "comic")
@@ -22,7 +20,7 @@ public class Comic implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comic_generator")
     @SequenceGenerator(name = "comic_generator", sequenceName = "comic_seq", allocationSize = 1)
-    private UUID id;
+    private Integer id;
 
     @Column(name = "digital_id")
     private Integer digitalId;
