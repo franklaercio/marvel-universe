@@ -1,11 +1,11 @@
-package com.marvel.backend.character.domain;
+package com.marvel.backend.global.domain;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class CharacterStoriesDTO {
+public class EntityDefaultResponse {
 
     public Integer available;
 

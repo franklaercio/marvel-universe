@@ -33,4 +33,9 @@ public class Story implements Serializable {
     @LastModifiedDate
     private Date modified;
 
+    @Override
+    public String toString() {
+        return this.title;
+    }
+
 }

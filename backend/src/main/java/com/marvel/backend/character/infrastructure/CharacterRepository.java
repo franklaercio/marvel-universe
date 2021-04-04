@@ -3,12 +3,12 @@ package com.marvel.backend.character.infrastructure;
 import com.marvel.backend.character.domain.Character;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CharacterRepository extends CrudRepository<Character, Integer> {
 
-    @Query("FROM Character character WHERE upper(character.name) = upper(:name)")
-    Optional<List<Character>> findByName(String name);
+    @Query("FROM Character c WHERE c.name like :name and c.name LIKE :nameStartsWith%")
+    List<Character> findAllByParams(@Param("name") String name, @Param("nameStartsWith") String nameStartsWith);
 }

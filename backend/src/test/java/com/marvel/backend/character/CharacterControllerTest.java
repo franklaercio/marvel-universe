@@ -65,21 +65,84 @@ public class CharacterControllerTest {
     }
 
     @Test
-    void shouldBeReturns404HttpStatusWhenInvalidCharacterId() throws Exception {
+    void shouldBeReturns409HttpStatusWhenInvalidCharacterId() throws Exception {
         this.mockMvc.perform(
                 get("/v1/public/characters/Hulk")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isConflict());
     }
 
     @Test
-    void shouldBeReturns400HttpStatusWhenNotFoundCharacterId() throws Exception {
+    void shouldBeReturnsHttpStatusOkCharacterComic() throws Exception {
         this.mockMvc.perform(
-                get("/v1/public/characters/99999")
+                get("/v1/public/characters/1/comics")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldBeReturn409HttpStatusCharacterComicWhenEnterTextId() throws Exception {
+        this.mockMvc.perform(
+                get("/v1/public/characters/Hulk/comics")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    void shouldBeReturnsHttpStatusOkCharacterEvent() throws Exception {
+        this.mockMvc.perform(
+                get("/v1/public/characters/1/events")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldBeReturn400HttpStatusCharacterEventWhenEnterTextId() throws Exception {
+        this.mockMvc.perform(
+                get("/v1/public/characters/Hulk/events")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    void shouldBeReturnsHttpStatusOkCharacterSeries() throws Exception {
+        this.mockMvc.perform(
+                get("/v1/public/characters/1/series")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldBeReturn400HttpStatusCharacterSeriesWhenEnterTextId() throws Exception {
+        this.mockMvc.perform(
+                get("/v1/public/characters/Hulk/series")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    void shouldBeReturnsHttpStatusOkCharacterStories() throws Exception {
+        this.mockMvc.perform(
+                get("/v1/public/characters/1/stories")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void shouldBeReturn400HttpStatusCharacterStoriesWhenEnterTextId() throws Exception {
+        this.mockMvc.perform(
+                get("/v1/public/characters/Hulk/stories")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isConflict());
     }
 
 }

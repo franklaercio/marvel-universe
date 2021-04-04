@@ -1,5 +1,6 @@
 package com.marvel.backend.character.domain;
 
+import com.marvel.backend.global.domain.EntityDefaultResponse;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -22,13 +23,13 @@ public class CharacterDTO {
 
     private String resourceURI;
 
-    private CharacterComicDTO comics;
+    private EntityDefaultResponse comics;
 
-    private CharacterSeriesDTO series;
+    private EntityDefaultResponse series;
 
-    private CharacterStoriesDTO stories;
+    private EntityDefaultResponse stories;
 
-    private CharacterEventDTO events;
+    private EntityDefaultResponse events;
 
     public void setModified(Date modified) {
         this.modified = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(modified);

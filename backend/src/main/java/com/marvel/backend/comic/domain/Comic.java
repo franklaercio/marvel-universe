@@ -53,4 +53,9 @@ public class Comic implements Serializable {
     @Column(name = "page_count")
     private Integer pageCount;
 
+    @Override
+    public String toString() {
+        return this.title;
+    }
+
 }

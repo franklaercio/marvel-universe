@@ -40,4 +40,9 @@ public class Event implements Serializable {
     @Column(name = "end_event")
     private Date end;
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
 }
