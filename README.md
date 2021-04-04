@@ -129,6 +129,6 @@ public class SwaggerConfig {
 
 ### Licença
 
-Este projeto é licenciado seguindo a normas da MIT License - veja o arquivo [LICENSE.md](http://license.md) para maiores detalhes.
+Este projeto é licenciado seguindo a normas da MIT License - veja o arquivo LICENSE.md para maiores detalhes.
 
 Feito com :hearts: by Frank Laércio :wave:!
