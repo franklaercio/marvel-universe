@@ -87,6 +87,10 @@ A seguir podemos observar como a estrutura do projeto está definida.
 	        
 ```
 
+<p>
+   <img alt="Imagem geral do projeto" src="assets/images/marvel.png" />
+<p>
+
 ### Testes da Aplicação
 
 O desenvolvimento foi baseado seguindo TDD, ou seja, antes de ter implementado as funcionalidades os testes já tinham sidos implementados e foi seguido os pequenos ciclos de repetições que foram: elaborar o teste, executar o teste e esperar que ele falhe por falte de alguma classe não implementada ainda, criar a classe, executar o teste novamente e esperar que o teste retorne com sucesso, caso o contrário deve-se ajustar o teste e a classe até que o teste funcione conforme o esperado.
