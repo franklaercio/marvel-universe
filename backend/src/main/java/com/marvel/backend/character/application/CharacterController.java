@@ -10,6 +10,7 @@ import com.marvel.backend.series.domain.SeriesDTO;
 import com.marvel.backend.series.infrastructure.SeriesService;
 import com.marvel.backend.story.domain.StoryDTO;
 import com.marvel.backend.story.infrastructure.StoryService;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Api(value = "Character")
 @RequestMapping("/v1/public/characters")
 public class CharacterController {
 
