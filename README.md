@@ -57,36 +57,34 @@ Dessa forma, primeiro foi atribuído o contexto de cada entidade do projeto como
 A seguir podemos observar como a estrutura do projeto está definida.
 
 ```
-```
 └── backend
     └── src
-				└── main
-						└── java
-								└── com.marvel.backend
-										├── character
-						        │   ├── application
-						        │   ├── infrastructure
-						        │   └── domain
-						        ├── comic
-						        │   ├── infrastructure
-						        │   └── domain
-						        ├── creator
-										|		├── infrastructure
-						        │   └── domain
-						        ├── event
-						        │   ├── infrastructure
-						        │   └── domain
-										├── global
-						        │   ├── infrastructure
-						        │   └── domain
-										├── series
-						        │   ├── infrastructure
-						        │   └── domain
-						        └── story
-						            ├── infrastructure
-						            └── domain
+	└── main
+	    └── java
+		└── com.marvel.backend
+			├── character
+			│   ├── application
+			│   ├── infrastructure
+			│   └── domain
+			├── comic
+			│   ├── infrastructure
+			│   └── domain
+			├── creator
+			|   ├── infrastructure
+			│   └── domain
+			├── event
+			│   ├── infrastructure
+			│   └── domain
+			├── global
+			│   ├── infrastructure
+			│   └── domain
+			├── series
+			│   ├── infrastructure
+			│   └── domain
+			└── story
+			    ├── infrastructure
+			    └── domain
 	        
-```
 ```
 
 ### Testes da Aplicação
