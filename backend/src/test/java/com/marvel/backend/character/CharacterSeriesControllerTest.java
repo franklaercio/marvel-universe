@@ -49,7 +49,7 @@ public class CharacterSeriesControllerTest {
     @Test
     void shouldBeReturn404HttpStatusCharacterSeriesWhenNotFoundCharacterId() throws Exception {
         this.mockMvc.perform(
-                get("/v1/public/characters/100/series")
+                get("/v1/public/characters/-1/series")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
