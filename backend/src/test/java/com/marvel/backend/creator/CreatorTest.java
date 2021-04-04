@@ -10,9 +10,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -29,9 +31,11 @@ public class CreatorTest {
     @Test
     public void shouldBeSavedCreator() {
         Creator creator = Mockito.mock(Creator.class);
+        creator.setId(1);
         creator.setName("Lorem ipsum");
+        creator.setModified(new Date());
 
-        creatorRepository.save(creator);
+        when(creatorRepository.save(any(Creator.class))).thenReturn(creator);
 
         assertThat(creator.getId()).isNotNull();
 

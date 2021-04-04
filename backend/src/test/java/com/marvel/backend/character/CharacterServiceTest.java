@@ -1,16 +1,22 @@
 package com.marvel.backend.character;
 
-import com.marvel.backend.character.infrastructure.CharacterRepository;
+import com.marvel.backend.character.domain.CharacterDTO;
 import com.marvel.backend.character.infrastructure.CharacterService;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.fail;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -19,37 +25,50 @@ public class CharacterServiceTest {
     @Autowired
     private Flyway flyway;
 
-    @Autowired
-    private CharacterRepository characterRepository;
-
-    private CharacterService characterService = Mockito.mock(CharacterService.class);
+    @Mock
+    private CharacterService characterService;
 
     @BeforeEach
     public void setUp() {
         flyway.clean();
         flyway.migrate();
 
-        //this.characterService = new CharacterService(characterRepository);
+        MockitoAnnotations.openMocks(this);
+
+        this.characterService = Mockito.mock(CharacterService.class);
     }
 
     @Test
     void whenFindCharacterWithoutParamsShouldBeReturnResults() {
-        //List<CharacterDTO> characters = this.characterService.findAll();
-        //assertThat(characters).asList().isNotNull();
-        fail("Not implemented");
+        List<CharacterDTO> list = characterService.findAll("%", "");
+
+        assertThat(list).isNotNull();
+
+        verify(this.characterService, times(1)).findAll("%", "");
     }
 
     @Test
     void whenFindCharacterHulkShouldBeReturnOneResult() {
-        //Character character = this.characterService.findAll("Hulk");
-        //assertThat(character).isNotNull();
-        fail("Not implemented");
+        List<CharacterDTO> list = characterService.findAll("Hulk", "");
+
+        assertThat(list).isNotNull();
+
+        verify(this.characterService, times(1)).findAll("Hulk", "");
     }
 
     @Test
-    void whenFindCharacterNotSavedShouldBeReturnNull() {
-        //Character character = this.characterService.characters("Lorem Ipsum");
-        // assertThat(character).isNull();
-        fail("Not implemented");
+    void whenFindCharacterNotSavedShouldBeReturnEmpty() {
+        List<CharacterDTO> list = characterService.findAll("", "");
+
+        assertThat(list).isEmpty();
+
+        verify(this.characterService, times(1)).findAll("", "");
+    }
+
+    @Test
+    void whenFindCharacterByIdShouldBeReturnOneResult() {
+        characterService.findByCharacterId(1);
+
+        verify(this.characterService, times(1)).findByCharacterId(1);
     }
 }

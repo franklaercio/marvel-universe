@@ -1,16 +1,22 @@
 package com.marvel.backend.series;
 
-import com.marvel.backend.series.infrastructure.SeriesRepository;
+import com.marvel.backend.series.domain.SeriesDTO;
 import com.marvel.backend.series.infrastructure.SeriesService;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.fail;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -19,29 +25,34 @@ public class SeriesServiceTest {
     @Autowired
     private Flyway flyway;
 
-    @Autowired
-    private SeriesRepository seriesRepository;
-
-    private SeriesService seriesService = Mockito.mock(SeriesService.class);
+    @Mock
+    private SeriesService seriesService;
 
     @BeforeEach
     public void setUp() {
         flyway.clean();
         flyway.migrate();
 
-        this.seriesService = new SeriesService(seriesRepository);
+        MockitoAnnotations.openMocks(this);
+
+        this.seriesService = Mockito.mock(SeriesService.class);
     }
 
     @Test
     void whenFindCharacterSeriesWithId1ShouldBeReturnResult() {
-        //Character character = this.seriesService.charactersSeriess(1);
-        fail("Not implemented");
+        List<SeriesDTO> list = seriesService.findByCharacterId(1);
+
+        assertThat(list).isNotNull();
+
+        verify(this.seriesService, times(1)).findByCharacterId(1);
     }
 
     @Test
-    void whenFindCharacterSeriesNotSavedShouldBeReturnNull() {
-        //Character character = this.seriesService.charactersSeriess(100);
-        //assertThat(character).isNull();
-        fail("Not implemented");
+    void whenFindCharacterSeriesNotSavedShouldBeReturnEmpty() {
+        List<SeriesDTO> list = seriesService.findByCharacterId(1);
+
+        assertThat(list).isEmpty();
+
+        verify(this.seriesService, times(1)).findByCharacterId(1);
     }
 }
