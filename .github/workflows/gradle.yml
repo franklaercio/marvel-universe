@@ -19,7 +19,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11
+        image: postgres
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -37,10 +37,4 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      env:
-        POSTGRES_HOST: postgres
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: marvel
-        POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
       run: ./gradlew build
