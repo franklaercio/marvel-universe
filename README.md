@@ -12,6 +12,7 @@ De modo a iniciar essa tarefa com uma maior rapidez foi decidido que a API seria
 - Swagger UI 2.6.1
 - Junit 5.7.0
 - Flyway
+- Heroku
 
 ### Como obter o projeto
 
@@ -24,6 +25,22 @@ $ git clone <https://github.com/franklaercio/marvel-universe.git>
 # Acesse a pasta do projeto
 $ cd marvel-universive
 
+```
+
+Além disso a aplicação pode ser acessada por meio da URL abaixo:
+
+```
+# Hospedado no Heroku
+https://marvel-universe-app.herokuapp.com
+```
+
+### CI/CD
+Assim que é feito um novo commit foi desenvolvida uma actions que executa todo o processo de build da aplicação, incluindo os testes e caso tudo esteja funcionando corretamente a aplicação no Heroku é atualizada automaticamente. <br />
+A action de build pode ser verificada no diretório abaixo:
+
+```
+# CI utilizando o Github Actions
+cd .github/workflows/gradle.yml
 ```
 
 ### Scripts automatizados e conexão ao banco de dados
