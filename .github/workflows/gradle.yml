@@ -22,7 +22,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
         ports:
-          - 5432:5432
+          - 5433:5432
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -40,6 +40,6 @@ jobs:
       run: chmod +x gradlew
     - name: Create database
       run: |
-        PGPASSWORD=postgres psql -U postgres -tc "SELECT 'CREATE DATABASE marvel' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'marvel')"
+        PGPASSWORD=postgres psql -U postgres -tc "CREATE DATABASE marvel"
     - name: Build with Gradle
       run: ./gradlew build
