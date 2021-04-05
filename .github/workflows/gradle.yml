@@ -28,6 +28,8 @@ jobs:
           apt-get update
           apt-get install --yes --no-install-recommends postgresql-client
     - run: |
-          psql -h postgres -U postgres -c 'CREATE DATABASE marvel'    
+          sudo -i -u postgres
+          psql
+          CREATE DATABASE marvel;
     - name: Build with Gradle
       run: ./gradlew build
